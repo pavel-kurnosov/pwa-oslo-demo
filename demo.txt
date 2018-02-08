@@ -1,0 +1,35 @@
+@Prop({ connect: "ion-loading-controller" })
+loadingCtrl: LoadingController;
+
+@Prop({ connect: "ion-alert-controller" })
+alertCtrl: AlertController;
+
+@Listen("imageCaptured")
+imageCapturedHandler(event: CustomEvent) {
+  console.log("Received the custom event: ", event.detail);
+  this.loadingCtrl.create().then(loading => {
+    loading.present();
+    fetch("https://us-central1-pwa-oslo.cloudfunctions.net/images", {
+      method: "POST",
+      body: event.detail
+    })
+      .then(response => response.json())
+      .catch(error => {
+        console.error("Error:", error);
+        loading.dismiss();
+      })
+      .then(response => {
+        this.alertCtrl
+          .create({
+            title: response.hotdog
+              ? "This is HotDog!"
+              : "Oh No, it is not HotDog!",
+            buttons: ["Dismiss"]
+          })
+          .then(alert => {
+            alert.present();
+          });
+        loading.dismiss();
+      });
+  });
+}

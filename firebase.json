@@ -1,0 +1,32 @@
+{
+  "hosting": {
+    "public": "www",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "sw.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "/",
+        "headers": [
+          {
+            "key": "Link",
+            "value":
+              "</build/app/app.qvkqvnxn.js>;rel=preload;as=script,</build/app/cgj6kci6.js>;rel=preload;as=script,</build/app/zbtu8moq.js>;rel=preload;as=script,</build/app/usrxxq8c.js>;rel=preload;as=script,</build/app/pzdrxf0h.js>;rel=preload;as=script,</build/app/yayakfgb.js>;rel=preload;as=script,</build/app/wvv4mblk.js>;rel=preload;as=script,</build/app/mhh252jf.js>;rel=preload;as=script,</build/app/vkoqnpww.js>;rel=preload;as=script"
+          }
+        ]
+      }
+    ]
+  }
+}
